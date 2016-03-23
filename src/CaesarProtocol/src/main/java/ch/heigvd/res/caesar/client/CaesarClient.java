@@ -44,6 +44,7 @@ public class CaesarClient {
             Protocol protocolIni = new Protocol(in.readLine());
             if(protocolIni.getHeader() != Protocol.entete.INI) throw new IOException("Bad iniialisation header");
             key = Integer.parseInt(protocolIni.getMessage());
+            System.out.println("Key: "+key);
 
         } catch (java.io.IOException e) {
             LOG.log(Level.SEVERE, "Erreur connect: " + e.getMessage());

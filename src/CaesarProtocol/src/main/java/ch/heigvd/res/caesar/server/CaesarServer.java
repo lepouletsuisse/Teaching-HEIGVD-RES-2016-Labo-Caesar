@@ -110,6 +110,8 @@ public class CaesarServer {
                     int max = 26;
                     int min = 1;
                     key = r.nextInt(max + 1 - min) + min;
+                    System.out.println("Key: "+key);
+
                     Protocol protocolIni = new Protocol("INI:"+key);
                     out.println(protocolIni.getParsedMessage());
                     out.flush();
@@ -127,11 +129,11 @@ public class CaesarServer {
                     LOG.info("Reading until client sends BYE Header or closes the connection...");
                     while ((shouldRun) && (line = in.readLine()) != null) {
                         Protocol protocolIn = new Protocol(line);
+                        protocolIn.decode(key);
                         if (protocolIn.getHeader() == Protocol.entete.BYE) {
                             shouldRun = false;
                             continue;
                         }
-                        protocolIn.decode(key);
                         System.out.println("> " + protocolIn.getMessage());
                         protocolIn.encode(key);
                         out.println(protocolIn.getParsedMessage());

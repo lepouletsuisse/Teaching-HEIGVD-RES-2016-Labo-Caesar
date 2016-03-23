@@ -71,7 +71,11 @@ public class Protocol {
             if (Character.isAlphabetic(c)) {
                 int numC = (int) c;
                 numC -= diff;
-                newString += (char) (((numC + key) % 26) + diff);
+                int truc = ((numC + key) % 26);
+                if(truc < 0){
+                    truc += 26;
+                }
+                newString += (char) (truc + diff);
             } else {
                 newString += c;
             }
@@ -91,7 +95,11 @@ public class Protocol {
             if (Character.isAlphabetic(c)) {
                 int numC = (int) c;
                 numC -= diff;
-                newString += (char) (((numC - key) % 26) + diff);
+                int truc = ((numC - key) % 26);
+                if(truc < 0){
+                    truc += 26;
+                }
+                newString += (char) (truc + diff);
             } else {
                 newString += c;
             }
